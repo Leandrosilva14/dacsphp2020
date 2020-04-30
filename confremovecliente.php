@@ -48,49 +48,24 @@
     </div>
   </nav>
 
+  <?php
+    $id=$_GET['id'];
+  ?>
+
   <!-- Page Content -->
   <div class="container">
     
-    <?php
-        $con = mysqli_connect("localhost","bob","bob","univille");
-        $sql = "select * from cliente";
-        $result = mysqli_query($con,$sql);
-    ?>
-
     <!-- Jumbotron Header -->
     <header class="jumbotron my-4">
       <p class="lead">
-      <a href="formcliente.php" class="btn btn-primary">Incluir</a>
-      <h3>Listagem de clientes</h3>
-      <table class="table">
-        <thead>
-          <tr>
-            <th> Id</th>
-            <th> Nome</th>
-            <th> Endereço</th>
-            <th> Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php
-          while($row = $result->fetch_row()){
-          ?>
-          <tr>
-            <td><?=$row[0]?></td>
-            <td><?=$row[1]?></td>
-            <td><?=$row[2]?></td>
-            <td><a href="formcliente.php?id=<?=$row[0]?>" class="btn btn-primary">Alterar</a>
-                <a href="confremovecliente.php?id=<?=$row[0]?>" class="btn btn-warning">Remover</a>
-            </td>
-          </tr>
-          <?php
-          }
-          ?>
-        </tbody>
-        </table>
-        
+          <h3>Confirma exclusão do cliente?</h3>
+          <p>
+              <a href="removecliente.php?id=<?=$id?>" class="btn btn-warning">SIM</a>
+              <a href="index.php" class="btn btn-primary">NÃO</a>
+          </p>
+      </p>
     </header>
-    </p>
+
   </div>
   <!-- /.container -->
 

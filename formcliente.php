@@ -48,6 +48,27 @@
     </div>
   </nav>
 
+  <?php
+    $id=0;
+    $nome="";
+    $endereco="";
+    
+      if(isset($_GET['id'])){
+          $con = mysqli_connect("localhost","bob","bob","univille");
+          $select = "select * from cliente where codigo = ?";
+          $stmt = mysqli_prepare($con, $select);
+          mysqli_stmt_bind_param($stmt, "i", $_GET['id']);
+          mysqli_stmt_execute($stmt);
+          mysqli_stmt_bind_result($stmt, $result);
+          $result = mysqli_stmt_get_result($stmt);
+          $row = $result->fetch_assoc();
+          $id = $row['codigo'];
+          $nome = $row['nome'];
+          $endereco = $row['endereco'];
+      }
+    
+  ?>
+
   <!-- Page Content -->
   <div class="container">
     
@@ -57,15 +78,15 @@
       <h3>Cliente</h3>
       <form method="post" action="savecliente.php">
         
-        <input type="hidden" name="txtId" value="0">
+        <input type="hidden" name="txtId" value="<?=$id?>">
         
         <div class="form-group">
           <label for="txtNome">Nome</label>
-          <input type="text" class ="form-control" id="txtNome" name="txtNome">
+          <input type="text" class ="form-control" id="txtNome" name="txtNome" value="<?=$nome?>">
         </div>
         <div class="form-group">
           <label for="txtEndereco">Endereço</label>
-          <input type="text" class ="form-control" id="txtEndereco" name="txtEndereco">
+          <input type="text" class ="form-control" id="txtEndereco" name="txtEndereco" value="<?=$endereco?>">
         </div>
        <button type="submit" class="btn btn-primary">Enviar</button>
       </form>

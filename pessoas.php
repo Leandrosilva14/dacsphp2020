@@ -6,8 +6,8 @@
     <body>
         <table>
         <?php
-            $con = mysqli_connect("localhost","bob","bob","univille");
-            $sql = "select * from cliente";
+            $con = mysqli_connect("localhost","bob","bob","integrantes_casa");
+            $sql = "select * from pessoas";
 		    $result = mysqli_query($con,$sql);
 		    while($row = $result->fetch_row()){
 		       echo "<tr>";

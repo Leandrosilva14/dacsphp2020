@@ -52,22 +52,22 @@
   <div class="container">
     
     <?php
-        $con = mysqli_connect("localhost","bob","bob","univille");
-        $sql = "select * from cliente";
+        include 'dbconnect.php';
+        $sql = "select * from pessoas";
         $result = mysqli_query($con,$sql);
     ?>
 
     <!-- Jumbotron Header -->
     <header class="jumbotron my-4">
       <p class="lead">
-      <a href="formcliente.php" class="btn btn-primary">Incluir</a>
-      <h3>Listagem de clientes</h3>
+      <a href="formpessoas.php" class="btn btn-primary">Incluir</a>
+      <h3>Integrantes da minha casa</h3>
       <table class="table">
         <thead>
           <tr>
             <th> Id</th>
             <th> Nome</th>
-            <th> Endereço</th>
+            <th> Idade</th>
             <th> Ações</th>
           </tr>
         </thead>
@@ -79,8 +79,8 @@
             <td><?=$row[0]?></td>
             <td><?=$row[1]?></td>
             <td><?=$row[2]?></td>
-            <td><a href="formcliente.php?id=<?=$row[0]?>" class="btn btn-primary">Alterar</a>
-                <a href="confremovecliente.php?id=<?=$row[0]?>" class="btn btn-warning">Remover</a>
+            <td><a href="formpessoas.php?id=<?=$row[0]?>" class="btn btn-primary">Alterar</a>
+                <a href="confremovepessoas.php?id=<?=$row[0]?>" class="btn btn-warning">Remover</a>
             </td>
           </tr>
           <?php

@@ -49,7 +49,24 @@
   </nav>
 
   <?php
-    $id=$_GET['id'];
+    include 'dbconnect.php';
+    $id=0;
+    $nome="";
+    $idade=0;
+    
+      if(isset($_GET['id'])){
+          $select = "select * from pessoas where codigo = ?";
+          $stmt = mysqli_prepare($con, $select);
+          mysqli_stmt_bind_param($stmt, "i", $_GET['id']);
+          mysqli_stmt_execute($stmt);
+          mysqli_stmt_bind_result($stmt, $result);
+          $result = mysqli_stmt_get_result($stmt);
+          $row = $result->fetch_assoc();
+          $id = $row['codigo'];
+          $nome = $row['nome'];
+          $idade = $row['idade'];
+      }
+    
   ?>
 
   <!-- Page Content -->
@@ -58,11 +75,22 @@
     <!-- Jumbotron Header -->
     <header class="jumbotron my-4">
       <p class="lead">
-          <h3>Confirma exclusão do cliente?</h3>
-          <p>
-              <a href="removecliente.php?id=<?=$id?>" class="btn btn-warning">SIM</a>
-              <a href="index.php" class="btn btn-primary">NÃO</a>
-          </p>
+      <h3>Cliente</h3>
+      <form method="post" action="savepessoas.php">
+        
+        <input type="hidden" name="txtId" value="<?=$id?>">
+        
+        <div class="form-group">
+          <label for="txtNome">Nome</label>
+          <input type="text" class ="form-control" id="txtNome" name="txtNome" value="<?=$nome?>">
+        </div>
+        <div class="form-group">
+          <label for="txtIdade">Idade</label>
+          <input type="text" class ="form-control" id="txtIdade" name="txtIdade" value="<?=$idade?>">
+        </div>
+       <button type="submit" class="btn btn-primary">Enviar</button>
+      </form>
+      
       </p>
     </header>
 
